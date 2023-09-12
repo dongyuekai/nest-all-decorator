@@ -16,7 +16,8 @@ import { MyQuery } from './MyDecorators/MyQuery.decorator';
 import { Ddd } from './MyDecorators/Ddd.decorator';
 
 // @Controller()
-@Ddd() // 自定义class的装饰器
+// @Ddd() // 自定义class的装饰器
+@Ddd('eee', 'dyk') //地址就需要写 localhost:3000/eee/hello5 这样了
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -27,6 +28,7 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
   @Get('hello4') // 访问 localhost:3000/hello4访问此路由
   getHello4(@Ccc() c) {
     return c; // 参数装饰器的返回值就是参数的值

@@ -15,8 +15,10 @@ export class AaaGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    // guard里通过reflector来取metadata
-    console.log(this.reflector.get('aaa', context.getHandler()));
+    // guard通过reflector来取方法（handler）上设置的metadata
+    console.log(this.reflector.get('aaa', context.getHandler())); // admin2
+    // guard通过reflector来取class上设置的metadata
+    console.log(this.reflector.get('ddd', context.getClass())); // dyk
     return true;
   }
 }

@@ -1,3 +1,3 @@
 import { SetMetadata } from '@nestjs/common';
 
-export const Aaa = (...args: string[]) => SetMetadata('aaa', args);
+export const Aaa = (...args: string[]) => SetMetadata('aaa', args[0]);
