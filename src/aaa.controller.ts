@@ -8,6 +8,7 @@ import {
   HttpCode,
   Header,
   Redirect,
+  Render,
 } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
@@ -73,6 +74,13 @@ export class AaaController {
       url: 'https://www.baidu.com',
       statusCode: 302,
     };
+  }
+
+  // 在hander里指定模板和数据
+  @Get('user')
+  @Render('user')
+  user() {
+    return { name: 'dong', age: 22 };
   }
 }
 
