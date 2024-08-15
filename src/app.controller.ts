@@ -1,10 +1,14 @@
 import {
   Controller,
   Get,
+  Post,
   SetMetadata,
   UseGuards,
   Headers,
   Query,
+  Body,
+  Ip,
+  Session,
   ParseIntPipe,
 } from '@nestjs/common';
 import { AppService } from './app.service';
@@ -14,6 +18,7 @@ import { Ccc } from './MyDecorators/ccc.decorator';
 import { MyHeaders } from './MyDecorators/MyHeaders.decorator';
 import { MyQuery } from './MyDecorators/MyQuery.decorator';
 import { Ddd } from './MyDecorators/Ddd.decorator';
+import { AaaDto } from './aaa.dto';
 
 // @Controller()
 // @Ddd() // 自定义class的装饰器
@@ -39,6 +44,7 @@ export class AppController {
   getHello5(@Headers('Accept') headers1, @MyHeaders('Accept') headers2) {
     console.log('header1===', headers1);
     console.log('header2===', headers2);
+    return 'headers1---' + headers1 + '---headers2---' + headers2;
   }
 
   @Get('hello6') // http://localhost:3000/hello6?aaa=112&bbb=dyk
@@ -56,5 +62,26 @@ export class AppController {
   ) {
     console.log('aaa===', aaa + 1); //
     console.log('bbb===', bbb + 1); //
+  }
+
+  @Post('/bbb')
+  getHello3(@Body() aaa: AaaDto) {
+    console.log('dyk---', aaa);
+    return 'hello-bbb';
+  }
+
+  @Get('/ip')
+  getIp(@Ip() ip: string) {
+    console.log('dyk---ip----', ip);
+  }
+
+  @Get('/session')
+  getSession(@Session() session) {
+    if (!session.count) {
+      session.count = 0;
+    }
+    session.count = session.count + 1;
+    console.log('dyk---session---', session);
+    return session.count;
   }
 }
